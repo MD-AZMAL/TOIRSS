@@ -29,7 +29,13 @@ if html.status_code == 200:
 	topic_list = rss_list(html)
 
 	print('choose one section...\n1: Main feed\n2: Cities\n3: World\n4: Blogs \n5: Option\n6: Sunday TOI\n7: Others\n')
-	choice = int(input('Enter choice : '))
+	while True:
+		choice = int(input('Enter choice : '))
+		if choice in range(1,7):
+			break
+		else:
+			print('Invalid choice enter again.....')
+
 	print('\n')
 	sub_topic = topic_list[choice-1]
 	for sub_element in sub_topic:
