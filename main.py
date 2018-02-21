@@ -32,13 +32,14 @@ def rss_page(element):
 		xml_soup = BeautifulSoup(xml.content,'xml')
 
 		items = xml_soup.find_all('item')
-		item_list = []
-		for item in items:
-			title = item.find('title').text
-			desc = item.find('description').text
-			li = item.find('link').text
-			dt = item.find('pubDate').text
-			item_list.append({'title':title,'desc':desc,'li':li,'dt':dt})
+		item_list = [{'title':item.find('title').text,'desc':item.find('description').text,'li':item.find('link').text,'dt':item.find('pubDate').text} for item in items]
+		# item_list = []
+		# for item in items:
+		# 	title = item.find('title').text
+		# 	desc = item.find('description').text
+		# 	li = item.find('link').text
+		# 	dt = item.find('pubDate').text
+		# 	item_list.append({'title':title,'desc':desc,'li':li,'dt':dt})
 		return item_list
 	else:
 		print('Unable to connect')
