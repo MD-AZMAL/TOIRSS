@@ -41,5 +41,14 @@ if html.status_code == 200:
 	for sub_element in sub_topic:
 		print('{} {}'.format(sub_element['#'],sub_element['text']))
 
+	while True:
+		choice = int(input('Choose an option : '))
+		if choice in range(1,len(sub_topic) + 1):
+			break
+		else:
+			print('Invalid choice enter again.....')
+	
+
+
 else:
 	print('Unable to connect')
