@@ -42,6 +42,9 @@ def rss_page(element):
 		print('Unable to connect')
 		return []
 
+def show_news(news):
+	for n in news:
+		print('{}\n\n{}\n\nlink : {}\n\ndate : {}\n\n\n'.format(n['title'],n['desc'],n['li'],n['dt']))
 
 main_url = 'https://timesofindia.indiatimes.com/rss.cms'
 
@@ -70,5 +73,6 @@ if html.status_code == 200:
 		else:
 			print('Invalid choice enter again.....')
 	news = rss_page(sub_topic[choice-1])
+	show_news(news)
 else:
 	print('Unable to connect')
