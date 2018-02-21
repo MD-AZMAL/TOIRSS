@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 
 def rss_list(html):
+	"""return the list of all pages containing rss feed"""
 	soup = BeautifulSoup(html.content,'html.parser')
 
 	all_p = soup.find('div',{'id':'main-copy'}).find_all('p')[1:]
@@ -22,6 +23,7 @@ def rss_list(html):
 	return all_topics
 
 def rss_page(element):
+	""" Return each news elements"""
 	url = element['li']
 	
 	xml = requests.get(url)
@@ -43,6 +45,7 @@ def rss_page(element):
 		return []
 
 def show_news(news):
+	"""Display the news"""
 	for n in news:
 		print('{}\n\n{}\n\nlink : {}\n\ndate : {}\n\n\n'.format(n['title'],n['desc'],n['li'],n['dt']))
 
