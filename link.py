@@ -28,10 +28,12 @@ html = requests.get(main_url)
 if html.status_code == 200:
 	topic_list = rss_list(html)
 
-	for sub_topic in topic_list:
-		for sub_element in sub_topic:
-			print('{} \t {}'.format(sub_element['#'],sub_element['text']))
-		print('\n\n')
+	print('choose one section...\n1: Main feed\n2: Cities\n3: World\n4: Blogs \n5: Option\n6: Sunday TOI\n7: Others\n')
+	choice = int(input('Enter choice : '))
+	print('\n')
+	sub_topic = topic_list[choice-1]
+	for sub_element in sub_topic:
+		print('{} {}'.format(sub_element['#'],sub_element['text']))
 
 else:
 	print('Unable to connect')
