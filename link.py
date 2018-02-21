@@ -21,6 +21,28 @@ def rss_list(html):
 
 	return all_topics
 
+def rss_page(element):
+	url = element['li']
+	
+	xml = requests.get(url)
+
+	if xml.status_code == 200:
+		xml_soup = BeautifulSoup(xml.content,'xml')
+
+		items = xml_soup.find_all('item')
+		item_list = []
+		for item in items:
+			title = item.find('title').text
+			desc = item.find('description').text
+			li = item.find('link').text
+			dt = item.find('pubDate').text
+			item_list.append({'title':title,'desc':desc,'li':li,'dt':dt})
+		return item_list
+	else:
+		print('Unable to connect')
+		return []
+
+
 main_url = 'https://timesofindia.indiatimes.com/rss.cms'
 
 html = requests.get(main_url)
@@ -47,8 +69,6 @@ if html.status_code == 200:
 			break
 		else:
 			print('Invalid choice enter again.....')
-	
-
-
+	news = rss_page(sub_topic[choice-1])
 else:
 	print('Unable to connect')
